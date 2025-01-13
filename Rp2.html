@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Quality PDF Viewer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            color: #000000;
+        }
+
+
+
+
+        #pdf-container {
+            height: calc(100vh - 50px);
+            /* Adjust height for toolbar */
+            overflow-y: scroll;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Horizontally center content */
+            padding: 20px;
+        }
+
+        .pdf-page {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="pdf-container"></div>
+
+    <script>
+        const url = 'CMSPRO[503].pdf'; // Replace with your PDF file
+        const pdfContainer = document.getElementById('pdf-container');
+        let pdfDoc = null;
+        let zoom = 1.0;
+
+        // Load PDF
+        pdfjsLib.getDocument(url).promise.then(doc => {
+            pdfDoc = doc;
+            renderPages();
+        });
+
+        // Render all pages
+        function renderPages() {
+            for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+                pdfDoc.getPage(pageNum).then(page => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.classList.add('pdf-page');
+                    pdfContainer.appendChild(canvas);
+
+                    // Improve resolution with higher scaling factor
+                    const viewport = page.getViewport({ scale: zoom * 2 }); // Use higher scale
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+
+                    const renderCtx = {
+                        canvasContext: ctx,
+                        viewport: viewport
+                    };
+
+                    page.render(renderCtx);
+                });
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

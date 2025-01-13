@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADARSH.U</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Linking the external CSS file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.1.0/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.1.0/anime.min.js"></script>
+
+
+</head>
+
+<body>
+
+
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <h1 class="logo">ADARSH .U</h1>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#proficiency">Proficiency</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 id="random-text"></h1>
+            <!-- <p>I'm Adarsh, a passionate developer ready to bring your ideas to life.</p> -->
+        </div>
+    </header>
+
+    <script>
+        const targetText = "Amazed to see U"; // Original text
+        const textElement = document.getElementById("random-text");
+        const letters = "abcdefghijklmnopqrstuvwxyz"; // Random character pool
+
+        // Function to generate random characters
+        function getRandomChar() {
+            return letters[Math.floor(Math.random() * letters.length)];
+        }
+
+        // Function to animate the entire text from left to right
+        async function animateText() {
+            let currentText = "";  // Start with an empty text
+            textElement.innerText = currentText;  // Set the initial text to empty
+
+            // Now animate each letter from left to right
+            for (let i = 0; i < targetText.length; i++) {
+                const char = targetText[i];
+                if (char === " ") {
+                    currentText += " "; // Add space directly, no animation needed
+                    textElement.innerText = currentText; // Update text
+                    continue; // Skip space
+                }
+                await animateLetter(char, i, currentText); // Animate non-space characters
+                currentText += char; // Add the original character after animation
+            }
+        }
+
+        // Function to animate a single letter
+        function animateLetter(letter, index, currentText) {
+            return new Promise(resolve => {
+                let iterations = 0;
+                const maxIterations = 5; // Number of random changes per letter
+                const interval = setInterval(() => {
+                    const currentTextArray = currentText.split("");  // Get the current text as an array
+
+                    // Replace current letter with a random character
+                    currentTextArray[index] = getRandomChar();
+                    textElement.innerText = currentTextArray.join("");  // Update the displayed text
+                    iterations++;
+
+                    if (iterations === maxIterations) {
+                        // Replace with the original letter and stop animation
+                        currentTextArray[index] = letter;
+                        textElement.innerText = currentTextArray.join("");  // Finalize the animation
+                        clearInterval(interval);
+                        resolve();  // Resolve the promise and move to next character
+                    }
+                }, 40); // Speed of random changes (100ms)
+            });
+        }
+
+        // Start animation once the page loads
+        window.addEventListener("load", animateText);
+    </script>
+
+
+    <!-- Sections -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+
+            <div class="about-text">
+                <h2>Know About Me</h2>
+                <h1>I'm an intern @Afame Technology.</h1>
+                <p>
+                    I am a recent MCA graduate from PES University, with a strong foundation in web development using
+                    HTML5, CSS3, JavaScript, Python, and MySQL. I also have a keen interest in machine learning,
+                    specializing in neural networks with TensorFlow and PyTorch. I am passionate about combining these
+                    skills to create innovative, user-centric solutions and contribute to projects that leverage
+                    cutting-edge technologies.
+                </p>
+                <div class="line">
+                    <div class="line-inner"></div>
+                </div>
+
+            </div>
+            <script>document.addEventListener('DOMContentLoaded', () => {
+                    const aboutText = document.querySelector('.about-text');
+
+                    const observer = new IntersectionObserver(
+                        (entries) => {
+                            entries.forEach((entry) => {
+                                if (entry.isIntersecting) {
+                                    entry.target.classList.add('visible'); // Add the visible class
+                                }
+                            });
+                        },
+                        {
+                            threshold: 0.2, // Trigger when 20% of the element is visible
+                        }
+                    );
+
+                    // Observe the .about-text element
+                    observer.observe(aboutText);
+                });
+            </script>
+            <script>
+                const line = document.querySelector('.line-inner');
+
+                window.addEventListener('scroll', () => {
+                    const scrollY = window.scrollY;
+                    const lineWidth = line.offsetWidth;
+                    const maxScroll = document.body.scrollHeight - window.innerHeight;
+
+                    const scrollProgress = scrollY / maxScroll;
+                    const linePosition = scrollProgress * lineWidth;
+
+                    line.style.left = `${linePosition}px`;
+                });
+            </script>
+            <!-- Right Image Section -->
+            <div class="about-image">
+                <img src="exp.png" alt="Profile Image">
+            </div>
+            <script>
+                const aboutImage = document.querySelector('.about-image img');
+
+                window.addEventListener('scroll', () => {
+                    const scrollY = window.scrollY;
+                    const maxScroll = document.body.scrollHeight - window.innerHeight;
+                    const scrollProgress = scrollY / maxScroll;
+
+                    // Calculate the maximum movement (adjust as needed)
+                    const maxMovement = 250; // Pixels
+
+                    // Calculate the current movement based on scroll progress
+                    const movement = scrollProgress * maxMovement;
+
+                    // Apply the movement to the image's transform
+                    aboutImage.style.transform = `translateX(-${movement}px)`;
+                });
+            </script>
+        </div>
+    </section>
+
+
+    <section class="experience" id="experience">
+        <p>MY EXPERIENCES</p>
+
+        <div class="e-line">
+            <div class="e-line-inner"></div>
+        </div>
+        <div class="experience-container">
+            <div class="experience-item">
+                <h3>Web Developer Intern @ Afame Technologies</h3>
+                <p>Nov - Present</p>
+                <ul>
+                    <li>Assisting in designing and developing web applications.</li>
+                    <li>Gaining practical experience while contributing to front-end and back-end development.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Frontend Developer Intern @ GrapplTech</h3>
+                <p>Aug - Sept.</p>
+                <ul>
+                    <li>Worked in a team responsible for building interfaces using technologies like React, Tailwind
+                        CSS,
+                        and Bootstrap.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const experienceContainer = document.querySelector('.experience-container');
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            experienceContainer.classList.add('visible');
+                        }
+                    });
+                },
+                {
+                    threshold: 0.2, // Trigger when 20% of the section is visible
+                }
+            );
+
+            observer.observe(experienceContainer);
+        });
+    </script>
+    <script>
+        const line2 = document.querySelector('.e-line-inner');
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY; // Current scroll position
+            const maxScroll = document.body.scrollHeight - window.innerHeight; // Maximum scrollable height
+
+            const scrollProgress = scrollY / maxScroll; // Scroll progress as a fraction
+            const lineHeight = document.querySelector('.e-line').offsetHeight; // Height of the vertical line
+            const maxMove = lineHeight - line2.offsetHeight; // Maximum distance the inner line can move
+
+            // Calculate the new top position of the inner line
+            const newTop = 50 + (scrollProgress * maxMove);
+
+            line2.style.top = `${newTop}px`; // Apply the new position
+        });
+    </script>
+
+
+    <!-- Project Section -->
+    <section class="project-section" id="projects">
+
+        <div class="project-title">
+
+            <p>PROJECTS</p>
+            <div class="item">
+                <i class="loader --3"></i>
+            </div>
+            <!-- <div class="p-line">
+                <div class="p-line-inner"></div>
+            </div> -->
+
+        </div>
+        <script>
+            const line4 = document.querySelector('.p-line-inner');
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const lineWidth = line4.offsetWidth;
+                const maxScroll = document.body.scrollHeight - window.innerHeight;
+
+                const scrollProgress = scrollY / maxScroll;
+                const linePosition = scrollProgress * lineWidth;
+
+                line4.style.left = `${60 + linePosition}px`;
+            });
+        </script>
+        <div class="project-container">
+            <!-- Text Section -->
+            <div class="project-text">
+                <h1>Helmet Detection & Reporting</h1>
+                <p class="technology">Technology: Machine Learning</p>
+
+                <ul class="features">
+                    <li>Video input to detect riders without helmets using OpenCV, capturing images of riders and number
+                        plates.</li>
+                    <li>Displaying a list of reports containing images and rider details.</li>
+                    <li>Integrated Twilio API for sending SMS alerts to registered phone numbers.</li>
+                </ul>
+                <button class="read-more-button" id="tran">
+                    <span>Read More</span>
+                    <span>→</span>
+                </button>
+                <div class="reveal" id="reveal"></div>
+
+                <script>
+                    const pages = ["page2.html"];
+                    let currentPage = 0;
+
+                    const button = document.getElementById("tran");
+                    button.addEventListener("click", (event) => {
+                        const buttonRect = button.getBoundingClientRect();
+                        const x = buttonRect.left + buttonRect.width / 2;
+                        const y = buttonRect.top + buttonRect.height / 2;
+
+                        // Trigger the animation
+                        const reveal = document.getElementById("reveal");
+                        reveal.style.backgroundColor = "#000"; // Set the transition color
+
+                        anime({
+                            targets: reveal,
+                            clipPath: [`circle(0% at ${x}px ${y}px)`, `circle(150% at ${x}px ${y}px)`],
+                            easing: "easeInOutQuad",
+                            duration: 1000,
+                            complete: () => {
+                                // Increment the page index
+                                currentPage++;
+
+                                // Check if there are more pages
+                                if (currentPage >= pages.length) {
+                                    currentPage = 0; // Reset to the first page if it exceeds
+                                }
+
+                                // Redirect to the next page
+                                window.location.href = pages[currentPage];
+                            }
+                        });
+                    });
+                </script>
+
+            </div>
+
+
+            <!-- Image Carousel Section -->
+            <div class="project-image1">
+                <img src="rider.png" alt="Rider Detection" class="active">
+                <img src="processing.png" alt="Processing Data">
+                <img src="gernerated.png" alt="Generated Reports">
+                <img src="details.png" alt="Report Details">
+                <img src="twilio.png" alt="Twilio Alerts">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Image Carousel JavaScript
+        const images = document.querySelectorAll('.project-image1 img');
+        let currentIndex = 0;
+
+        function showNextImage() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        }
+
+        // Switch images every 3 seconds
+        setInterval(showNextImage, 2000);
+    </script>
+    <section class="project-section" id="clinic-appointment">
+
+        <div class="project-container">
+            <!-- Image Section -->
+            <div class="project-image2">
+                <img src="C1.jpeg" alt="Clinic Appointment System" class="active">
+                <img src="C2.jpeg" alt="Appointment Scheduling">
+                <img src="C3.jpeg" alt="Doctor Availability">
+                <img src="C4.jpeg" alt="Patient Management">
+                <img src="C5.jpeg" alt="doc_image">
+            </div>
+
+            <!-- Text Section -->
+            <div class="project-text">
+                <h1>Clinic Appointment System</h1>
+                <p class="technology">Technology: Web Development</p>
+
+                <ul class="features">
+                    <li>Allows patients to book appointments with available doctors.</li>
+                    <li>Doctors can manage their availability and view patient details.</li>
+                    <li>Admin can oversee all appointments, update clinic details, and manage users.</li>
+                </ul>
+                <!-- <a href="#" class="read-more" onclick="showPDF(event)">Read More →</a> -->
+
+                <button class="read-more-button" id="tran2">
+                    <span>Read More</span>
+                    <span>→</span>
+                </button>
+                <div class="reveal2" id="reveal2"></div>
+
+                <script>
+                    const pages2 = ["Rp2.html"];
+                    let currentPage2 = 0;
+
+                    const button2 = document.getElementById("tran2"); // Correct reference to button2
+                    button2.addEventListener("click", (event) => { // Use button2 instead of button
+                        const buttonRect = button2.getBoundingClientRect();
+                        const x = buttonRect.left + buttonRect.width / 2;
+                        const y = buttonRect.top + buttonRect.height / 2;
+
+                        // Trigger the animation
+                        const reveal2 = document.getElementById("reveal2");
+                        reveal2.style.backgroundColor = "#000"; // Set the transition color
+
+                        anime({
+                            targets: reveal2,
+                            clipPath: [`circle(0% at ${x}px ${y}px)`, `circle(150% at ${x}px ${y}px)`],
+                            easing: "easeInOutQuad",
+                            duration: 1000,
+                            complete: () => {
+                                // Increment the page index
+                                currentPage2++;
+
+                                // Check if there are more pages
+                                if (currentPage2 >= pages2.length) {
+                                    currentPage2 = 0; // Reset to the first page if it exceeds
+                                }
+
+                                // Redirect to the next page
+                                window.location.href = pages2[currentPage2];
+                            }
+                        });
+                    });
+                </script>
+
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        // Image Carousel JavaScript
+        const images2 = document.querySelectorAll('.project-image2 img');
+        let currentIndex2 = 0;
+
+        function showNextImage() {
+            images2[currentIndex2].classList.remove('active');
+            currentIndex2 = (currentIndex2 + 1) % images2.length;
+            images2[currentIndex2].classList.add('active');
+        }
+
+        // Switch images every 3 seconds
+        setInterval(showNextImage, 2000);
+    </script>
+
+
+
+
+    <section id="proficiency" class="proficiency">
+        <!-- Background Video Wrapper -->
+        <video autoplay muted loop id="background-video">
+            <source src="eart_line2.mp4" type="video/mp4">
+            <!-- Fallback in case the video format is not supported -->
+            Your browser does not support the video tag.
+        </video>
+
+
+        <!-- Your text content remains unchanged -->
+        <div class="overlay-text">
+            <h2>Proficiency</h2>
+            <div class="row">
+                <div class="card">
+                    <img src="https://img.icons8.com/color/48/java-coffee-cup-logo--v1.png" alt="Java">
+                    <span>Java</span>
+                </div>
+                <div class="card">
+                    <img src="https://img.icons8.com/color/48/sql.png" alt="SQL">
+                    <span>SQL</span>
+                </div>
+                <div class="card">
+                    <img src="https://img.icons8.com/color/48/css3.png" alt="CSS">
+                    <span>CSS</span>
+                </div>
+                <div class="card">
+                    <img src="https://img.icons8.com/color/48/html-5.png" alt="HTML">
+                    <span>HTML</span>
+                </div>
+                <div class="card">
+                    <img src="https://img.icons8.com/color/48/javascript.png" alt="JavaScript">
+                    <span>JavaScript</span>
+                </div>
+            </div>
+            <hr>
+            <h2>Core Competencies</h2>
+            <div class="row">
+                <div class="card">
+                    <img src="https://img.icons8.com/office/40/react.png" alt="React">
+                    <span>React</span>
+                </div>
+                <div class="card">
+                    <img src="https://img.icons8.com/color/48/python.png" alt="Python">
+                    <span>Python</span>
+                </div>
+                <div class="card" style="padding-left: 1%;">
+                    <img src="https://adarsh1859.github.io/portfolio/assets/ml.png" alt="Machine Learning">
+                    <span>Machine Learning</span>
+                </div>
+                <div class="card">
+                    <img src="https://img.icons8.com/color/48/microsoft-excel-2019.png" alt="MS Excel">
+                    <span>MS Excel</span>
+                </div>
+            </div>
+            <hr>
+            <h2>Familarities</h2>
+            <div class="row">
+                <div class="card">
+                    <img src="	https://adarsh1859.github.io/portfolio/assets/c.png" alt="C">
+                    <span>C</span>
+                </div>
+                <div class="card">
+                    <img src="https://adarsh1859.github.io/portfolio/assets/reactnative.png" alt="SQL">
+                    <span>React Native</span>
+                </div>
+                <div class="card">
+                    <img src="data:image/png;base64,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"
+                        alt="CSS">
+                    <span>Flutter</span>
+                </div>
+                <div class="card">
+                    <img src="	https://adarsh1859.github.io/portfolio/assets/tailwind.png" alt="HTML">
+                    <span>Tailwind</span>
+                </div>
+                <div class="card">
+                    <img src="https://adarsh1859.github.io/portfolio/assets/flask.png" alt="JavaScript">
+                    <span>Flask</span>
+                </div>
+                <div class="card">
+                    <img src="https://adarsh1859.github.io/portfolio/assets/aws.png" alt="JavaScript">
+                    <span>AWS</span>
+                </div>
+            </div>
+        </div>
+        <div class="star-container"></div>
+    </section>
+    <script> const starContainer = document.querySelector('.star-container');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = Math.random() * 100 + '%'; // Adjust to percentage
+            star.style.top = Math.random() * 100 + '%'; // Adjust to percentage
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            starContainer.appendChild(star);
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const proficiencySection = document.querySelector('#proficiency');
+            const cards = document.querySelectorAll('#proficiency .card');
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible'); // Add the visible class
+                        }
+                    });
+                },
+                {
+                    threshold: 0.1, // Trigger when 20% of the element is visible
+                }
+            );
+
+            // Observe the main section
+            observer.observe(proficiencySection);
+
+            // Add delays for cards to animate in a staggered fashion
+            cards.forEach((card, index) => {
+                card.style.setProperty('--card-delay', `${index * 0.1}s`); // Stagger delay by 0.1s
+                observer.observe(card);
+            });
+        });
+
+    </script>
+
+
+
+
+    <!-- <section id="education" class="section">
+        <div class="container">
+            <h2>Education</h2>
+            <p>Detail your educational background here.</p>
+        </div>
+    </section> -->
+    <section id="education" class="section">
+
+        <div class="container">
+            <h2>Education</h2>
+            <div class="education-items">
+                <div class="education-item">
+                    <h3>MCA - PES University</h3>
+                    <p><strong>2022 - 2024</strong></p>
+                    <p>Focused on web development, machine learning, and AWS Cloud services. Improved DSA with impactful
+                        resources.</p>
+                </div>
+                <div class="education-item">
+                    <h3>BCA - Divekar College</h3>
+                    <p><strong>2019 - 2022</strong></p>
+                    <p>Developed a strong foundation in computer science, programming and OOPS concepts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="contact" class="contact-section">
+        <!-- Background Video -->
+        <!-- <video autoplay muted loop id="contact-bg-video">
+            <source src="c-bg3.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video> -->
+        <video id="video-forward" muted>
+            <source src="c-bg3.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <video id="video-reverse" muted>
+            <source src="c-bg32.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Content Wrapper -->
+        <div class="contact-overlay">
+            <div class="container3">
+                <h2>Connect with me</h2>
+
+                <div class="contact-links">
+                    <!-- Email -->
+                    <a href="mailto:adarshulvekar49@gmail.com" target="_blank" class="contact-item">
+                        <img src="https://img.icons8.com/fluency/48/email.png" alt="Email">
+                        <span>Email</span>
+                    </a>
+
+                    <!-- GitHub -->
+                    <a href="https://github.com/adarsh1859" target="_blank" class="contact-item">
+                        <img src="https://img.icons8.com/fluency/48/github.png" alt="GitHub">
+                        <span>GitHub</span>
+                    </a>
+
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/adarsh-ulvekar/" target="_blank" class="contact-item">
+                        <img src="https://img.icons8.com/fluency/48/linkedin.png" alt="LinkedIn">
+                        <span>LinkedIn</span>
+                    </a>
+
+                    <!-- Resume -->
+                    <a href="Adarsh-Ulvekar-1.1v.pdf" target="_blank" class="contact-item">
+                        <img src="https://img.icons8.com/fluency/48/download.png" alt="Resume">
+                        <span>Download Resume</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <script>
+            const videoForward = document.getElementById('video-forward');
+            const videoReverse = document.getElementById('video-reverse');
+
+            // Start with the forward video
+            videoForward.classList.add('active');
+            videoForward.play();
+
+            videoForward.addEventListener('ended', () => {
+                // Switch to reversed video
+                videoForward.classList.remove('active');
+                videoReverse.classList.add('active');
+                videoReverse.play();
+            });
+
+            videoReverse.addEventListener('ended', () => {
+                // Switch back to forward video
+                videoReverse.classList.remove('active');
+                videoForward.classList.add('active');
+                videoForward.play();
+            });
+
+        </script>
+    </section>
+
+
+    <!-- JavaScript -->
+    <script>
+        const navbar = document.getElementById("navbar");
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > lastScrollY) {
+                navbar.classList.add("hidden"); // Hide navbar on scroll down
+            } else {
+                navbar.classList.remove("hidden"); // Show navbar on scroll up
+            }
+            lastScrollY = window.scrollY;
+        });
+    </script>
+
+
+</body>
+
+</html>

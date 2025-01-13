@@ -1,0 +1,70 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<body>
+    <div class="cat">
+        <div class="ear ear--left"></div>
+        <div class="ear ear--right"></div>
+        <div class="face">
+            <div class="eye eye--left">
+                <div class="eye-pupil"></div>
+            </div>
+            <div class="eye eye--right">
+                <div class="eye-pupil"></div>
+            </div>
+            <div class="muzzle"></div>
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                document.querySelector('.cat').style.display = 'none';
+            }, 3000); // Hides the cat after 3 seconds
+        };
+    </script>
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reload Page</title>
+    <link rel="stylesheet" href="reload.scss"> <!-- Compiled CSS file -->
+</head>
+
+<body>
+    <div class="cat">
+        <div class="ear ear--left"></div>
+        <div class="ear ear--right"></div>
+        <div class="face">
+            <div class="eye eye--left">
+                <div class="eye-pupil"></div>
+            </div>
+            <div class="eye eye--right">
+                <div class="eye-pupil"></div>
+            </div>
+            <div class="muzzle"></div>
+        </div>
+    </div>
+    <div class="message">
+        Getting Dark!
+    </div>
+
+    <script>
+        window.onload = function () {
+            // Set a timeout for 3 seconds to hide the cat
+            setTimeout(function () {
+                document.querySelector('.cat').style.display = 'none';
+                // Reload the page after 3 seconds of hiding the cat
+                window.location.reload();
+            }, 3000);
+        };
+    </script>
+</body>
+
+</html>
