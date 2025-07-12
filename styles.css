@@ -1101,3 +1101,15 @@ align-items: center;
     display: block;
     /* Only the active video is visible */
 }
+
+#contact {
+    background-image: url('last bg.png');
+    /* Make sure path is correct */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 40px;
+    /* Optional: Adjust as needed */
+    color: white;
+    /* Optional: improve contrast */
+}
